@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="WebMVCModelStoreContainer" CdmEntityContainer="WebMVCEntities">
+    <EntitySetMapping Name="BaoCaos">
+      <EntityTypeMapping TypeName="WebMVCModel.BaoCao">
+        <MappingFragment StoreEntitySet="BaoCao">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Tuan" ColumnName="Tuan" />
+          <ScalarProperty Name="Nhom_ID" ColumnName="Nhom_ID" />
+          <ScalarProperty Name="TieuDe" ColumnName="TieuDe" />
+          <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+          <ScalarProperty Name="ThoiGianBaoCao" ColumnName="ThoiGianBaoCao" />
+          <ScalarProperty Name="FileUpload" ColumnName="FileUpload" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ChucVus">
+      <EntityTypeMapping TypeName="WebMVCModel.ChucVu">
+        <MappingFragment StoreEntitySet="ChucVu">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="TenChucVu" ColumnName="TenChucVu" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ChucVu_NguoiDung">
+      <EntityTypeMapping TypeName="WebMVCModel.ChucVu_NguoiDung">
+        <MappingFragment StoreEntitySet="ChucVu_NguoiDung">
+          <ScalarProperty Name="NguoiDung_ID" ColumnName="NguoiDung_ID" />
+          <ScalarProperty Name="ChucVu_ID" ColumnName="ChucVu_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DeTais">
+      <EntityTypeMapping TypeName="WebMVCModel.DeTai">
+        <MappingFragment StoreEntitySet="DeTai">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="TenDeTai" ColumnName="TenDeTai" />
+          <ScalarProperty Name="YeuCauDeTai" ColumnName="YeuCauDeTai" />
+          <ScalarProperty Name="ThoiGianBatDau" ColumnName="ThoiGianBatDau" />
+          <ScalarProperty Name="ThoiGianKetThuc" ColumnName="ThoiGianKetThuc" />
+          <ScalarProperty Name="SoTuanThucHien" ColumnName="SoTuanThucHien" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NguoiDungs">
+      <EntityTypeMapping TypeName="WebMVCModel.NguoiDung">
+        <MappingFragment StoreEntitySet="NguoiDung">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="TenDangNhap" ColumnName="TenDangNhap" />
+          <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
+          <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+          <ScalarProperty Name="Nhom_ID" ColumnName="Nhom_ID" />
+          <ScalarProperty Name="DeTai_ID" ColumnName="DeTai_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Nhoms">
+      <EntityTypeMapping TypeName="WebMVCModel.Nhom">
+        <MappingFragment StoreEntitySet="Nhom">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="MaNhom" ColumnName="MaNhom" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PhanHois">
+      <EntityTypeMapping TypeName="WebMVCModel.PhanHoi">
+        <MappingFragment StoreEntitySet="PhanHoi">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="BaoCao_ID" ColumnName="BaoCao_ID" />
+          <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+          <ScalarProperty Name="TieuDe" ColumnName="TieuDe" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QuyenHans">
+      <EntityTypeMapping TypeName="WebMVCModel.QuyenHan">
+        <MappingFragment StoreEntitySet="QuyenHan">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="TenQuyenHan" ColumnName="TenQuyenHan" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="WebMVCModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="NguoiDung_QuyenHan" TypeName="WebMVCModel.NguoiDung_QuyenHan" StoreEntitySet="NguoiDung_QuyenHan">
+      <EndProperty Name="NguoiDung">
+        <ScalarProperty Name="ID" ColumnName="NguoiDung_ID" />
+      </EndProperty>
+      <EndProperty Name="QuyenHan">
+        <ScalarProperty Name="ID" ColumnName="QuyenHan_ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="QuyenHan_ChucVu" TypeName="WebMVCModel.QuyenHan_ChucVu" StoreEntitySet="QuyenHan_ChucVu">
+      <EndProperty Name="ChucVu">
+        <ScalarProperty Name="ID" ColumnName="ChucVu_ID" />
+      </EndProperty>
+      <EndProperty Name="QuyenHan">
+        <ScalarProperty Name="ID" ColumnName="QuyenHan_ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="WebMVCModel.Store.sp_alterdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="WebMVCModel.Store.sp_creatediagram" />
+    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="WebMVCModel.Store.sp_dropdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="WebMVCModel.Store.sp_helpdiagramdefinition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="WebMVCModel.sp_helpdiagramdefinition_Result">
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="WebMVCModel.Store.sp_helpdiagrams">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="WebMVCModel.sp_helpdiagrams_Result">
+          <ScalarProperty Name="Database" ColumnName="Database" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="WebMVCModel.Store.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="WebMVCModel.Store.sp_upgraddiagrams" />
+  </EntityContainerMapping>
+</Mapping>

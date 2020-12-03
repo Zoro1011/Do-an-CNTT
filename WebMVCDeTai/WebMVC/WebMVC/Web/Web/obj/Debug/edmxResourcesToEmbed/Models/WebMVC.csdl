@@ -1,0 +1,265 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="WebMVCModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="BaoCao">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Tuan" Type="Int32" />
+    <Property Name="Nhom_ID" Type="Int32" />
+    <Property Name="TieuDe" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ThoiGianBaoCao" Type="DateTime" Precision="3" />
+    <Property Name="FileUpload" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Nhom" Relationship="Self.FK_BaoCao_Nhom" FromRole="BaoCao" ToRole="Nhom" />
+    <NavigationProperty Name="PhanHois" Relationship="Self.FK_PhanHoi_BaoCao" FromRole="BaoCao" ToRole="PhanHoi" />
+  </EntityType>
+  <EntityType Name="ChucVu">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TenChucVu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="ChucVu_NguoiDung" Relationship="Self.FK_ChucVu_NguoiDung_ChucVu1" FromRole="ChucVu" ToRole="ChucVu_NguoiDung" />
+    <NavigationProperty Name="QuyenHans" Relationship="Self.QuyenHan_ChucVu" FromRole="ChucVu" ToRole="QuyenHan" />
+  </EntityType>
+  <EntityType Name="ChucVu_NguoiDung">
+    <Key>
+      <PropertyRef Name="NguoiDung_ID" />
+      <PropertyRef Name="ChucVu_ID" />
+    </Key>
+    <Property Name="NguoiDung_ID" Type="Int32" Nullable="false" />
+    <Property Name="ChucVu_ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ChucVu" Relationship="Self.FK_ChucVu_NguoiDung_ChucVu1" FromRole="ChucVu_NguoiDung" ToRole="ChucVu" />
+    <NavigationProperty Name="NguoiDung" Relationship="Self.FK_ChucVu_NguoiDung_NguoiDung1" FromRole="ChucVu_NguoiDung" ToRole="NguoiDung" />
+  </EntityType>
+  <EntityType Name="DeTai">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TenDeTai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="YeuCauDeTai" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="ThoiGianBatDau" Type="DateTime" Precision="3" />
+    <Property Name="ThoiGianKetThuc" Type="DateTime" Precision="3" />
+    <Property Name="SoTuanThucHien" Type="Int32" />
+    <NavigationProperty Name="NguoiDungs" Relationship="Self.FK_NguoiDung_DeTai" FromRole="DeTai" ToRole="NguoiDung" />
+  </EntityType>
+  <EntityType Name="NguoiDung">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TenDangNhap" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="MatKhau" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="HoTen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Nhom_ID" Type="Int32" />
+    <Property Name="DeTai_ID" Type="Int32" />
+    <NavigationProperty Name="ChucVu_NguoiDung" Relationship="Self.FK_ChucVu_NguoiDung_NguoiDung1" FromRole="NguoiDung" ToRole="ChucVu_NguoiDung" />
+    <NavigationProperty Name="DeTai" Relationship="Self.FK_NguoiDung_DeTai" FromRole="NguoiDung" ToRole="DeTai" />
+    <NavigationProperty Name="Nhom" Relationship="Self.FK_NguoiDung_Nhom" FromRole="NguoiDung" ToRole="Nhom" />
+    <NavigationProperty Name="QuyenHans" Relationship="Self.NguoiDung_QuyenHan" FromRole="NguoiDung" ToRole="QuyenHan" />
+  </EntityType>
+  <EntityType Name="Nhom">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MaNhom" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="BaoCaos" Relationship="Self.FK_BaoCao_Nhom" FromRole="Nhom" ToRole="BaoCao" />
+    <NavigationProperty Name="NguoiDungs" Relationship="Self.FK_NguoiDung_Nhom" FromRole="Nhom" ToRole="NguoiDung" />
+  </EntityType>
+  <EntityType Name="PhanHoi">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BaoCao_ID" Type="Int32" />
+    <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="TieuDe" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="BaoCao" Relationship="Self.FK_PhanHoi_BaoCao" FromRole="PhanHoi" ToRole="BaoCao" />
+  </EntityType>
+  <EntityType Name="QuyenHan">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TenQuyenHan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="NguoiDungs" Relationship="Self.NguoiDung_QuyenHan" FromRole="QuyenHan" ToRole="NguoiDung" />
+    <NavigationProperty Name="ChucVus" Relationship="Self.QuyenHan_ChucVu" FromRole="QuyenHan" ToRole="ChucVu" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_BaoCao_Nhom">
+    <End Role="Nhom" Type="Self.Nhom" Multiplicity="0..1" />
+    <End Role="BaoCao" Type="Self.BaoCao" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Nhom">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="BaoCao">
+        <PropertyRef Name="Nhom_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PhanHoi_BaoCao">
+    <End Role="BaoCao" Type="Self.BaoCao" Multiplicity="0..1" />
+    <End Role="PhanHoi" Type="Self.PhanHoi" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BaoCao">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PhanHoi">
+        <PropertyRef Name="BaoCao_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ChucVu_NguoiDung_ChucVu1">
+    <End Role="ChucVu" Type="Self.ChucVu" Multiplicity="1" />
+    <End Role="ChucVu_NguoiDung" Type="Self.ChucVu_NguoiDung" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ChucVu">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ChucVu_NguoiDung">
+        <PropertyRef Name="NguoiDung_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ChucVu_NguoiDung_NguoiDung1">
+    <End Role="NguoiDung" Type="Self.NguoiDung" Multiplicity="1" />
+    <End Role="ChucVu_NguoiDung" Type="Self.ChucVu_NguoiDung" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NguoiDung">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ChucVu_NguoiDung">
+        <PropertyRef Name="NguoiDung_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NguoiDung_DeTai">
+    <End Role="DeTai" Type="Self.DeTai" Multiplicity="0..1" />
+    <End Role="NguoiDung" Type="Self.NguoiDung" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DeTai">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="NguoiDung">
+        <PropertyRef Name="DeTai_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NguoiDung_Nhom">
+    <End Role="Nhom" Type="Self.Nhom" Multiplicity="0..1" />
+    <End Role="NguoiDung" Type="Self.NguoiDung" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Nhom">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="NguoiDung">
+        <PropertyRef Name="Nhom_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="NguoiDung_QuyenHan">
+    <End Role="NguoiDung" Type="Self.NguoiDung" Multiplicity="*" />
+    <End Role="QuyenHan" Type="Self.QuyenHan" Multiplicity="*" />
+  </Association>
+  <Association Name="QuyenHan_ChucVu">
+    <End Role="ChucVu" Type="Self.ChucVu" Multiplicity="*" />
+    <End Role="QuyenHan" Type="Self.QuyenHan" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="WebMVCEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="BaoCaos" EntityType="Self.BaoCao" />
+    <EntitySet Name="ChucVus" EntityType="Self.ChucVu" />
+    <EntitySet Name="ChucVu_NguoiDung" EntityType="Self.ChucVu_NguoiDung" />
+    <EntitySet Name="DeTais" EntityType="Self.DeTai" />
+    <EntitySet Name="NguoiDungs" EntityType="Self.NguoiDung" />
+    <EntitySet Name="Nhoms" EntityType="Self.Nhom" />
+    <EntitySet Name="PhanHois" EntityType="Self.PhanHoi" />
+    <EntitySet Name="QuyenHans" EntityType="Self.QuyenHan" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <AssociationSet Name="FK_BaoCao_Nhom" Association="Self.FK_BaoCao_Nhom">
+      <End Role="Nhom" EntitySet="Nhoms" />
+      <End Role="BaoCao" EntitySet="BaoCaos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PhanHoi_BaoCao" Association="Self.FK_PhanHoi_BaoCao">
+      <End Role="BaoCao" EntitySet="BaoCaos" />
+      <End Role="PhanHoi" EntitySet="PhanHois" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ChucVu_NguoiDung_ChucVu1" Association="Self.FK_ChucVu_NguoiDung_ChucVu1">
+      <End Role="ChucVu" EntitySet="ChucVus" />
+      <End Role="ChucVu_NguoiDung" EntitySet="ChucVu_NguoiDung" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ChucVu_NguoiDung_NguoiDung1" Association="Self.FK_ChucVu_NguoiDung_NguoiDung1">
+      <End Role="NguoiDung" EntitySet="NguoiDungs" />
+      <End Role="ChucVu_NguoiDung" EntitySet="ChucVu_NguoiDung" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NguoiDung_DeTai" Association="Self.FK_NguoiDung_DeTai">
+      <End Role="DeTai" EntitySet="DeTais" />
+      <End Role="NguoiDung" EntitySet="NguoiDungs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NguoiDung_Nhom" Association="Self.FK_NguoiDung_Nhom">
+      <End Role="Nhom" EntitySet="Nhoms" />
+      <End Role="NguoiDung" EntitySet="NguoiDungs" />
+    </AssociationSet>
+    <AssociationSet Name="NguoiDung_QuyenHan" Association="Self.NguoiDung_QuyenHan">
+      <End Role="NguoiDung" EntitySet="NguoiDungs" />
+      <End Role="QuyenHan" EntitySet="QuyenHans" />
+    </AssociationSet>
+    <AssociationSet Name="QuyenHan_ChucVu" Association="Self.QuyenHan_ChucVu">
+      <End Role="ChucVu" EntitySet="ChucVus" />
+      <End Role="QuyenHan" EntitySet="QuyenHans" />
+    </AssociationSet>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(WebMVCModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(WebMVCModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+  </EntityContainer>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+</Schema>

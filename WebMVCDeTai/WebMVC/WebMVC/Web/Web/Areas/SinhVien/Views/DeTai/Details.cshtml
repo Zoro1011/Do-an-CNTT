@@ -1,0 +1,59 @@
+﻿@model Web.Models.DeTai
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/SinhVien/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Đề tài</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TenDeTai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenDeTai)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.YeuCauDeTai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.YeuCauDeTai)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ThoiGianBatDau)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ThoiGianBatDau)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ThoiGianKetThuc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ThoiGianKetThuc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoTuanThucHien)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoTuanThucHien)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

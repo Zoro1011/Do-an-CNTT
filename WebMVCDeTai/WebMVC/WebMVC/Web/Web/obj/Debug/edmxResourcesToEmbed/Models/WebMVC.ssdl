@@ -1,0 +1,305 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="WebMVCModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="BaoCao">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Tuan" Type="int" />
+    <Property Name="Nhom_ID" Type="int" />
+    <Property Name="TieuDe" Type="nvarchar" MaxLength="50" />
+    <Property Name="NoiDung" Type="ntext" />
+    <Property Name="ThoiGianBaoCao" Type="datetime" />
+    <Property Name="FileUpload" Type="varchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="ChucVu">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenChucVu" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ChucVu_NguoiDung">
+    <Key>
+      <PropertyRef Name="NguoiDung_ID" />
+      <PropertyRef Name="ChucVu_ID" />
+    </Key>
+    <Property Name="NguoiDung_ID" Type="int" Nullable="false" />
+    <Property Name="ChucVu_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DeTai">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenDeTai" Type="nvarchar" MaxLength="50" />
+    <Property Name="YeuCauDeTai" Type="nvarchar" MaxLength="500" />
+    <Property Name="ThoiGianBatDau" Type="datetime" />
+    <Property Name="ThoiGianKetThuc" Type="datetime" />
+    <Property Name="SoTuanThucHien" Type="int" />
+  </EntityType>
+  <EntityType Name="NguoiDung">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenDangNhap" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="MatKhau" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="HoTen" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Nhom_ID" Type="int" />
+    <Property Name="DeTai_ID" Type="int" />
+  </EntityType>
+  <EntityType Name="NguoiDung_QuyenHan">
+    <Key>
+      <PropertyRef Name="QuyenHan_ID" />
+      <PropertyRef Name="NguoiDung_ID" />
+    </Key>
+    <Property Name="QuyenHan_ID" Type="int" Nullable="false" />
+    <Property Name="NguoiDung_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Nhom">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MaNhom" Type="varchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PhanHoi">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BaoCao_ID" Type="int" />
+    <Property Name="NoiDung" Type="ntext" />
+    <Property Name="TieuDe" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="QuyenHan">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenQuyenHan" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="QuyenHan_ChucVu">
+    <Key>
+      <PropertyRef Name="ChucVu_ID" />
+      <PropertyRef Name="QuyenHan_ID" />
+    </Key>
+    <Property Name="ChucVu_ID" Type="int" Nullable="false" />
+    <Property Name="QuyenHan_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <Association Name="FK_BaoCao_Nhom">
+    <End Role="Nhom" Type="Self.Nhom" Multiplicity="0..1" />
+    <End Role="BaoCao" Type="Self.BaoCao" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Nhom">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="BaoCao">
+        <PropertyRef Name="Nhom_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ChucVu_NguoiDung_ChucVu1">
+    <End Role="ChucVu" Type="Self.ChucVu" Multiplicity="1" />
+    <End Role="ChucVu_NguoiDung" Type="Self.ChucVu_NguoiDung" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ChucVu">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ChucVu_NguoiDung">
+        <PropertyRef Name="NguoiDung_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ChucVu_NguoiDung_NguoiDung1">
+    <End Role="NguoiDung" Type="Self.NguoiDung" Multiplicity="1" />
+    <End Role="ChucVu_NguoiDung" Type="Self.ChucVu_NguoiDung" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NguoiDung">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ChucVu_NguoiDung">
+        <PropertyRef Name="NguoiDung_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NguoiDung_DeTai">
+    <End Role="DeTai" Type="Self.DeTai" Multiplicity="0..1" />
+    <End Role="NguoiDung" Type="Self.NguoiDung" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DeTai">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="NguoiDung">
+        <PropertyRef Name="DeTai_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NguoiDung_Nhom">
+    <End Role="Nhom" Type="Self.Nhom" Multiplicity="0..1" />
+    <End Role="NguoiDung" Type="Self.NguoiDung" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Nhom">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="NguoiDung">
+        <PropertyRef Name="Nhom_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NguoiDung_QuyenHan_NguoiDung">
+    <End Role="NguoiDung" Type="Self.NguoiDung" Multiplicity="1" />
+    <End Role="NguoiDung_QuyenHan" Type="Self.NguoiDung_QuyenHan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NguoiDung">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="NguoiDung_QuyenHan">
+        <PropertyRef Name="NguoiDung_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NguoiDung_QuyenHan_QuyenHan">
+    <End Role="QuyenHan" Type="Self.QuyenHan" Multiplicity="1" />
+    <End Role="NguoiDung_QuyenHan" Type="Self.NguoiDung_QuyenHan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QuyenHan">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="NguoiDung_QuyenHan">
+        <PropertyRef Name="QuyenHan_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PhanHoi_BaoCao">
+    <End Role="BaoCao" Type="Self.BaoCao" Multiplicity="0..1" />
+    <End Role="PhanHoi" Type="Self.PhanHoi" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BaoCao">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PhanHoi">
+        <PropertyRef Name="BaoCao_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QuyenHan_ChucVu_ChucVu">
+    <End Role="ChucVu" Type="Self.ChucVu" Multiplicity="1" />
+    <End Role="QuyenHan_ChucVu" Type="Self.QuyenHan_ChucVu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ChucVu">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="QuyenHan_ChucVu">
+        <PropertyRef Name="ChucVu_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QuyenHan_ChucVu_QuyenHan">
+    <End Role="QuyenHan" Type="Self.QuyenHan" Multiplicity="1" />
+    <End Role="QuyenHan_ChucVu" Type="Self.QuyenHan_ChucVu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QuyenHan">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="QuyenHan_ChucVu">
+        <PropertyRef Name="QuyenHan_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="WebMVCModelStoreContainer">
+    <EntitySet Name="BaoCao" EntityType="Self.BaoCao" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ChucVu" EntityType="Self.ChucVu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ChucVu_NguoiDung" EntityType="Self.ChucVu_NguoiDung" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DeTai" EntityType="Self.DeTai" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NguoiDung" EntityType="Self.NguoiDung" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NguoiDung_QuyenHan" EntityType="Self.NguoiDung_QuyenHan" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Nhom" EntityType="Self.Nhom" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PhanHoi" EntityType="Self.PhanHoi" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="QuyenHan" EntityType="Self.QuyenHan" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="QuyenHan_ChucVu" EntityType="Self.QuyenHan_ChucVu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_BaoCao_Nhom" Association="Self.FK_BaoCao_Nhom">
+      <End Role="Nhom" EntitySet="Nhom" />
+      <End Role="BaoCao" EntitySet="BaoCao" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ChucVu_NguoiDung_ChucVu1" Association="Self.FK_ChucVu_NguoiDung_ChucVu1">
+      <End Role="ChucVu" EntitySet="ChucVu" />
+      <End Role="ChucVu_NguoiDung" EntitySet="ChucVu_NguoiDung" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ChucVu_NguoiDung_NguoiDung1" Association="Self.FK_ChucVu_NguoiDung_NguoiDung1">
+      <End Role="NguoiDung" EntitySet="NguoiDung" />
+      <End Role="ChucVu_NguoiDung" EntitySet="ChucVu_NguoiDung" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NguoiDung_DeTai" Association="Self.FK_NguoiDung_DeTai">
+      <End Role="DeTai" EntitySet="DeTai" />
+      <End Role="NguoiDung" EntitySet="NguoiDung" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NguoiDung_Nhom" Association="Self.FK_NguoiDung_Nhom">
+      <End Role="Nhom" EntitySet="Nhom" />
+      <End Role="NguoiDung" EntitySet="NguoiDung" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NguoiDung_QuyenHan_NguoiDung" Association="Self.FK_NguoiDung_QuyenHan_NguoiDung">
+      <End Role="NguoiDung" EntitySet="NguoiDung" />
+      <End Role="NguoiDung_QuyenHan" EntitySet="NguoiDung_QuyenHan" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NguoiDung_QuyenHan_QuyenHan" Association="Self.FK_NguoiDung_QuyenHan_QuyenHan">
+      <End Role="QuyenHan" EntitySet="QuyenHan" />
+      <End Role="NguoiDung_QuyenHan" EntitySet="NguoiDung_QuyenHan" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PhanHoi_BaoCao" Association="Self.FK_PhanHoi_BaoCao">
+      <End Role="BaoCao" EntitySet="BaoCao" />
+      <End Role="PhanHoi" EntitySet="PhanHoi" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QuyenHan_ChucVu_ChucVu" Association="Self.FK_QuyenHan_ChucVu_ChucVu">
+      <End Role="ChucVu" EntitySet="ChucVu" />
+      <End Role="QuyenHan_ChucVu" EntitySet="QuyenHan_ChucVu" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QuyenHan_ChucVu_QuyenHan" Association="Self.FK_QuyenHan_ChucVu_QuyenHan">
+      <End Role="QuyenHan" EntitySet="QuyenHan" />
+      <End Role="QuyenHan_ChucVu" EntitySet="QuyenHan_ChucVu" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

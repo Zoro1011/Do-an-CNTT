@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Web.Models.BaoCao>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/SinhVien/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Tuan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TieuDe)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NoiDung)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ThoiGianBaoCao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FileUpload)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nhom.MaNhom)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tuan)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TieuDe)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NoiDung)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ThoiGianBaoCao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FileUpload)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nhom.MaNhom)
+        </td>
+        <td>
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

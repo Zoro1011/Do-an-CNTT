@@ -1,0 +1,66 @@
+﻿@model Web.Models.BaoCao
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/SinhVien/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>BaoCao</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Tuan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tuan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TieuDe)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TieuDe)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NoiDung)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NoiDung)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ThoiGianBaoCao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ThoiGianBaoCao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FileUpload)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FileUpload)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nhom.MaNhom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nhom.MaNhom)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>
